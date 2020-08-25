@@ -5,12 +5,9 @@ iterative code in the instructions."""
 
 
 def get_fib(position):
-    if position == 0:
-        return 0
-    if position == 1:
-        return 1
-    next = get_fib(position - 1) + get_fib(position - 2)
-    return next
+    if position == 0 or position == 1:
+        return position
+    return get_fib(position - 1) + get_fib(position - 2)
 
 
 # Test cases
