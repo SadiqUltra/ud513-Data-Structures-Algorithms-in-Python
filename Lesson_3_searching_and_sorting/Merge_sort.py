@@ -36,5 +36,5 @@ def merge_sort(list):
     return merge(left, right)
 
 
-test = [2, 4, 1, 3]
+test = [21, 4, 1, 3, 9, 20, 25, 6, 21, 14]
 print(merge_sort(test))
