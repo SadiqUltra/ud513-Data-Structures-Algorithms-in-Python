@@ -1,4 +1,4 @@
-"""Implement quick sort in Python.
+"""Implement bubble sort in Python.
 Input a list.
 Output a sorted list."""
 
