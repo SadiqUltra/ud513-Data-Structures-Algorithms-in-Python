@@ -57,20 +57,15 @@ class Graph(object):
         Each section in the list will store a list
         of tuples that looks like this:
         (To Node, Edge Value)"""
-        adjacency_list = []
         max_index = self.get_max_index()
+        adjacency_list = [None for col in range(max_index)]
 
-        for i in range(0, max_index):
-            node = self.get_node_by_index(i)
-            adjacency = []
-            if node:
-                for edge in node.edges:
-                    if node.value != edge.node_to.value:
-                        adjacency.append((edge.node_to.value, edge.value))
-            if len(adjacency) == 0:
-                adjacency = None
+        for edge in self.edges:
+            if adjacency_list[edge.node_from.value] is None:
+                adjacency_list[edge.node_from.value] = [(edge.node_to.value, edge.value)]
+            else:
+                adjacency_list[edge.node_from.value].append((edge.node_to.value, edge.value))
 
-            adjacency_list.append(adjacency)
         return adjacency_list
 
     def get_max_index(self):
@@ -81,13 +76,6 @@ class Graph(object):
 
         return max_index + 1
 
-    def get_node_by_index(self, index):
-        for node in self.nodes:
-            if node.value == index:
-                return node
-
-        return None
-
     def get_adjacency_matrix(self):
         """Return a matrix, or 2D list.
         Row numbers represent from nodes,
@@ -97,12 +85,8 @@ class Graph(object):
         max_index = self.get_max_index()
         adjacency_matrix = [[0 for col in range(max_index)] for row in range(max_index)]
 
-        for i in range(0, max_index):
-            node = self.get_node_by_index(i)
-            if node:
-                for edge in node.edges:
-                    if edge.node_to.value != node.value:
-                        adjacency_matrix[i][edge.node_to.value] = edge.value
+        for edge in self.edges:
+            adjacency_matrix[edge.node_from.value][edge.node_to.value] = edge.value
 
         return adjacency_matrix
 
